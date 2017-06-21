@@ -47,11 +47,11 @@ class PXXview: UIView {
         }
         for index in 0..<elementCons {
             if let elementView = delegate?.elementWithAxisType(.AxisTypeX, index) {
-                let attr = [NSAttributedStringKey.font: elementView.font!]
+                let attr = [NSFontAttributeName: elementView.font!]
                 var elementSize = CGSize()
                 if let elementViewText = elementView.text {
                     xElements.append(elementViewText)
-                    elementSize = (elementViewText as NSString).size(withAttributes: attr)
+                    elementSize = (elementViewText as NSString).size(attributes: attr)
                 }
                 elementView.frame = CGRect(x: 0, y: self.frame.height-elementSize.height, width: elementSize.width, height: elementSize.height)
                 elementView.center = CGPoint(x: CGFloat(xElementInterval*Float(index+1)), y: elementView.center.y)

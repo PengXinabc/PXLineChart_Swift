@@ -134,8 +134,8 @@ class PXChartBackgroundView: UIView {
                             addSubview(pointButton!)
                         }
                         let pFont = axisAttributes?.pointFont ?? UIFont.systemFont(ofSize: 12)
-                        let attr = [NSAttributedStringKey.font: pFont]
-                        let  buttonSize = (pointYvalue as NSString).size(withAttributes: attr)
+                        let attr = [NSFontAttributeName: pFont]
+                        let  buttonSize = (pointYvalue as NSString).size(attributes: attr)
                         let titlebutton = UIButton()
                         titlebutton.setTitle(pointYvalue, for: .normal)
                         let titleColor = pointitem.px_pointValueColor()
@@ -185,9 +185,7 @@ extension UIButton {
     
     private struct PX_AssociatedKeys {
         static var operationKey  = "operationKey"
-    }
-    static var operationKey = "operationKey"
-    
+    }    
     func action(_ withEvent: UIControlEvents, operation: ((UIButton) -> Void)) {
         objc_setAssociatedObject(self, &PX_AssociatedKeys.operationKey, operation, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         self.addTarget(self, action: #selector(callAction(_:)), for: withEvent)

@@ -47,8 +47,8 @@ class PXYview: UIView {
         var firstIndex = 1
         for index in 0..<elementCons {
             if let elementView = delegate?.elementWithAxisType(.AxisTypeY, index) {
-                let attr = [NSAttributedStringKey.font: elementView.font!]
-                let elementSize = ("y" as NSString).size(withAttributes: attr)
+                let attr = [NSFontAttributeName: elementView.font!]
+                let elementSize = ("y" as NSString).size(attributes: attr)
                 var isfirstYAsOrigin = false
                 if let wrapedfirstYAsOrigin = axisAttributes?.firstYAsOrigin {
                     isfirstYAsOrigin = wrapedfirstYAsOrigin
