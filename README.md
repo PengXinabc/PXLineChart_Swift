@@ -1,16 +1,30 @@
-//
-//  ViewController.swift
-//  PXLineChart_Swift
-//
-//  Created by Xin Peng on 2017/6/15.
-//  Copyright © 2017年 EB. All rights reserved.
-//
+# PXLineChart（Swift版）
+![](https://img.shields.io/badge/build-passing-brightgreen.svg) ![](https://img.shields.io/badge/pod-v1.0.0-yellow.svg) ![](https://img.shields.io/badge/Carthage-compatible-green.svg) 
 
-import UIKit
+# 概述
 
-class ViewController: UIViewController {
-    
-    @IBOutlet weak var pXLineChartView: PXLineChartView!
+一个简单的可滑动的折线图，可滑动，可添加多条
+
+![](http://upload-images.jianshu.io/upload_images/1131567-f15b020baf9e4e12.gif?imageMogr2/auto-orient/strip)
+
+# 安装
+* CocoaPods
+
+```
+pod "PXLineChart"
+```
+* Carthage
+
+```
+github "PengXinabc/PXLineChart"
+```
+* 手动
+
+Drag the PXLineChart/LineChart folder into your project
+
+# 使用
+```
+@IBOutlet weak var pXLineChartView: PXLineChartView!
     var fill = false
     var lines: [[PointItemProtocol]]!//折线count
     var xElements: [String]!//x轴数据
@@ -143,7 +157,9 @@ extension ViewController: PXLineChartViewDataSource {
         lines = lineData(fill)
         pXLineChartView.reloadData()
     }
-    
-}
+
+```
+OC版本在此[PXLineChart_OC](https://github.com/PengXinabc/PXLineChart)
+详细介绍移步[简书](http://www.jianshu.com/p/90c68507e378)
 
 
