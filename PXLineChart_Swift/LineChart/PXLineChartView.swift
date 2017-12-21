@@ -118,6 +118,7 @@ extension PXLineChartViewDataSource {
     }
     func elementDidClickedWithPointSuperIndex(_ superidnex: Int, _ pointSubIndex: Int) {}
 }
+
 class PXLineChartView: UIView {
     
     fileprivate var scrollView: UIScrollView!
