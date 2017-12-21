@@ -49,40 +49,39 @@ class PXChartBackgroundView: UIView {
         if !isGridHide {
             var gridCon = yCon
             var isfirstYAsOrigin = false
-            if let wrapedfirstYAsOrigin = axisAttributes?.firstYAsOrigin, wrapedfirstYAsOrigin {
-                gridCon = yCon > 0 ? yCon - 1 : 0
-                isfirstYAsOrigin = wrapedfirstYAsOrigin
-            }
-            var oldSeparateViewFrame = CGRect()
+//            if let wrapedfirstYAsOrigin = axisAttributes?.firstYAsOrigin, wrapedfirstYAsOrigin {
+//                gridCon = yCon > 0 ? yCon - 1 : 0
+//                isfirstYAsOrigin = wrapedfirstYAsOrigin
+//            }
             for i in 0..<gridCon {
                 if let yElementlab = delegate?.elementWithAxisType(.AxisTypeY, i) {
-                    let pointY = yAxisView?.pointOfYcoordinate(yElementlab.text!)
-                    var newRect = CGRect()
-                    if (i != 0) {
-                        newRect = oldSeparateViewFrame.offsetBy(dx: 0, dy: -CGFloat(yAxisView!.yElementInterval))
-                    }else{
-                        newRect = CGRect(x: 0, y: pointY ?? 0, width: self.frame.width, height: CGFloat(yAxisView!.yElementInterval))
-                    }
-                    var fillcolor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
-                    if let customFillColor = axisAttributes?.gridColor {
-                        fillcolor = customFillColor
-                    }
-                    if isfirstYAsOrigin {
-                        if (i % 2 != 0) {
-                            UIColor.clear.setFill()
-                        }else{
-                            fillcolor.setFill()
+                    var guidHeight: Float = 0
+                    if i < gridCon - 1 {
+                        let ylaterElementlab: UILabel = (delegate?.elementWithAxisType(.AxisTypeY, i+1))!
+                        let pointY = yAxisView?.pointOfYcoordinate(ylaterElementlab.text!)
+                        guidHeight = (yAxisView?.guidHeight(yElementlab.text, laterYxisValue: ylaterElementlab.text))!
+                        let newRect = CGRect(x: 0, y: pointY ?? 0, width: self.frame.width, height: CGFloat(guidHeight))
+                        var fillcolor = UIColor(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
+                        if let customFillColor = axisAttributes?.gridColor {
+                            fillcolor = customFillColor
                         }
-                    }else{
-                        if (i % 2 == 0) {
-                            UIColor.clear.setFill()
+                        if isfirstYAsOrigin {
+                            if (i % 2 != 0) {
+                                UIColor.clear.setFill()
+                            }else{
+                                fillcolor.setFill()
+                            }
                         }else{
-                            fillcolor.setFill()
+                            if (i % 2 == 0) {
+                                UIColor.clear.setFill()
+                            }else{
+                                fillcolor.setFill()
+                            }
                         }
+                        let rectPath = UIBezierPath(rect: newRect)
+                        rectPath.fill()
                     }
-                    let rectPath = UIBezierPath(rect: newRect)
-                    rectPath.fill()
-                    oldSeparateViewFrame = newRect
+                    
                     
                 }
             }
